@@ -25,7 +25,9 @@ app.post('/api/ai/:task', async (req, res) => {
   const task = String(req.params.task);
   if (!['opening', 'help', 'twist', 'suggest'].includes(task)) return res.status(400).json({ error: 'Unsupported AI task.' });
   const result = await generate(task, req.body ?? {});
-  return res.json({ result, fallback: !process.env.ANTHROPIC_API_KEY });
+  const provider = process.env.AI_PROVIDER === 'gemini' ? 'gemini' : 'anthropic';
+  const hasKey = provider === 'gemini' ? Boolean(process.env.GEMINI_API_KEY) : Boolean(process.env.ANTHROPIC_API_KEY);
+  return res.json({ result, fallback: !hasKey });
 });
 app.post('/api/rooms', (req, res) => {
   let roomCode = code();

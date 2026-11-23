@@ -9,7 +9,12 @@ npm install
 npm run dev
 ```
 
-Development uses Vite at `http://localhost:5173` and the API at `http://localhost:3000`. Copy `.env.example` to `.env` and add `ANTHROPIC_API_KEY` when AI features are enabled.
+Development uses Vite at `http://localhost:5173` and the API at `http://localhost:3000`. Copy `.env.example` to `.env` and configure one AI provider:
+
+- `AI_PROVIDER=anthropic` — set `ANTHROPIC_API_KEY` to enable Anthropic.
+- `AI_PROVIDER=gemini` — set `GEMINI_API_KEY` to enable Google's official Gemini API.
+
+If no key is set for the selected provider, StoryFlix automatically uses the existing no-AI fallback lines.
 
 ## Production
 
